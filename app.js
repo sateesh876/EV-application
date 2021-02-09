@@ -1,72 +1,35 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const mysql = require('mysql')
-
-const app = express()
-const port = process.env.PORT || 5000
-
-app.use(bodyParser.urlencoded({ extended: false}))
-
-app.use(bodyParser.json())
-
-//MySQL
-const pool = mysql.createPool({
-    connectionLimit : 10,
-    host            : 'localhost',
-    user            : 'root',
-    password        : '',
-    database        : 'nodejs_ex'
-})
+const cors = require('cors')
 
 
-app.get('',(req, res) => {
-    pool.getConnection((err, connection) =>{
-        if(err) throw err
-        console.log(`connected as id ${connection.threadId}`)
-        connection.query('SELECT * from beers',(err, rows)=>{
-            connection.release()
+var products = require('./api/products');
+var orders = require('./api/orders');
+const app = express();
 
-            if(!err) {
-                res.send(rows)
-            } else {
-                console.log(err)
-            }
-        })
-    })
-})
+app.use(cors());
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({extended:false}));
 
-app.get('/:id',(req, res) => {
-    pool.getConnection((err, connection) =>{
-        if(err) throw err
-        console.log(`connected as id ${connection.threadId}`)
-        connection.query('SELECT * from beers WHERE id=?',[req.params.id], (err, rows) =>{
-            connection.release()
+app.use("/products",products);
+app.use("/orders",orders);
 
-            if(!err) {
-                res.send(rows)
-            } else {
-                console.log(err)
-            }
-        })
-    })
-})
+//if we are here then the specified request is not found
+app.use((req,res,next)=> {
+    const err = new Error("Not Found");
+    err.status = 404;
+    next(err);
+});
 
-app.delete('/:id',(req, res) => {
-    pool.getConnection((err, connection) =>{
-        if(err) throw err
-        console.log(`connected as id ${connection.threadId}`)
-        connection.query('DELETE from beers WHERE id=?',[req.params.id], (err, rows) =>{
-            connection.release()
+//all other requests are not implemented.
+app.use((err,req, res, next) => {
+   res.status(err.status || 501);
+   res.json({
+       error: {
+           code: err.status || 501,
+           message: err.message
+       }
+   });
+});
 
-            if(!err) {
-                res.send(`charging station with record id ${[req.params.id]} has been removed.`)
-            } else {
-                console.log(err)
-            }
-        })
-    })
-})
-
-
-//Listen on environment port or 5000
-app.listen(port, () => console.log('Listen on port ${port}'))
+module.exports = app;
