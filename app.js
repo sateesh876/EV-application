@@ -66,15 +66,56 @@ app.post('', (req, res) => {
         connection.query('INSERT INTO cstation_details SET ?', params, (err, rows) => {
         connection.release() // return the connection to pool
         if (!err) {
-            res.send(`Station with the record ID  has been added.`)
+            res.send(`station with the record ID  has been added.`)
         } else {
             console.log(err)
         }
         
-        console.log('The data from cstation table are:11 \n', rows)
+        console.log('The data from cstations table are: \n', rows)
 
         })
     })
 });
+
+app.delete('/:id', (req, res) => {
+
+    pool.getConnection((err, connection) => {
+        if(err) throw err
+        connection.query('DELETE FROM cstation_details WHERE cstation_id = ?', [req.params.id], (err, rows) => {
+            connection.release() // return the connection to pool
+            if (!err) {
+                res.send(`station with the record ID ${[req.params.id]} has been removed.`)
+            } else {
+                console.log(err)
+            }
+            
+            console.log('The data from stations table are: \n', rows)
+        })
+    })
+});
+
+app.put('', (req, res) => {
+
+    pool.getConnection((err, connection) => {
+        if(err) throw err
+        console.log(`connected as id ${connection.threadId}`)
+
+        const { cstation_id, cstation_name, cs_latitude, cs_longitude, cs_address, cs_city, cs_district } = req.body
+
+        connection.query('UPDATE cstation_details SET cstation_name = ?, cs_latitude = ?, cs_longitude = ?, cs_address = ?, cs_city = ?, cs_district = ? WHERE cstation_id = ?', [cstation_name, cs_latitude, cs_longitude, cs_address, cs_city, cs_district, cstation_id] , (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err) {
+                res.send(`station with the name: ${cstation_name} has been added.`)
+            } else {
+                console.log(err)
+            }
+
+        })
+
+        console.log(req.body)
+    })
+})
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
