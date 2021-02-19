@@ -5,6 +5,8 @@ const User = function(user) {
   this.dev_id = user.dev_id;
   this.u_name = user.u_name;
   this.password = user.password;
+  this.phone_number = user.phone_number;
+  this.date_of_birth = user.date_of_birth;
 };
 
 User.create = (newUser, result) => {
@@ -54,8 +56,8 @@ User.getAll = result => {
 
 User.updateById = (id, user, result) => {
   sql.query(
-    "UPDATE user_details SET dev_id = ?, u_name = ?, password = ? WHERE u_id = ?",
-    [user.dev_id, user.u_name, user.password, id],
+    "UPDATE user_details SET dev_id = ?, u_name = ?, password = ?, phone_number = ?, date_of_birth = ? WHERE u_id = ?",
+    [user.dev_id, user.u_name, user.password,user.phone_number,user.date_of_birth, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
