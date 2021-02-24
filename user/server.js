@@ -14,7 +14,13 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
 
+require("./app/routes/station.routes.js")(app);
+require("./app/routes/device.routes.js")(app);
+require("./app/routes/vehicle.routes.js")(app);
 require("./app/routes/customer.routes.js")(app);
+require("./app/routes/chistory.routes.js")(app);
+require("./app/routes/shistory.routes.js")(app);
+require("./app/routes/parts.routes.js")(app);
 // set port, listen for requests
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
