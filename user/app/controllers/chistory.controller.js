@@ -40,7 +40,7 @@ exports.findAll = (req, res) => {
           message:
             err.message || "Some error occurred while retrieving chistory's."
         });
-      else res.send(data);
+      else res.send(data);S
     });
   };
 
