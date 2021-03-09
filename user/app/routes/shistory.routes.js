@@ -13,6 +13,7 @@ module.exports = app => {
     // Update a history with shistoryId
     app.put("/shistory/:shistoryId", shistory.update);
   
+    
     // Delete a history with shistoryId
     app.delete("/shistory/:shistoryId", shistory.delete);
   

@@ -13,6 +13,7 @@ module.exports = app => {
     // Update a booking with bookingId
     app.put("/bookings/:bookingId", bookings.update);
   
+    
     // Delete a booking with bookingId
     app.delete("/bookings/:bookingId", bookings.delete);
   

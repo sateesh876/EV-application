@@ -13,6 +13,7 @@ module.exports = app => {
     // Update a Device with deviceId
     app.put("/devices/:deviceId", devices.update);
   
+    
     // Delete a Device with deviceId
     app.delete("/devices/:deviceId", devices.delete);
   

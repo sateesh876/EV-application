@@ -16,6 +16,7 @@ module.exports = app => {
     // Delete a Station with stationId
     app.delete("/stations/:stationId", stations.delete);
   
+    
     // Create a new Station
     app.delete("/stations", stations.deleteAll);
   };

@@ -16,6 +16,7 @@ module.exports = app => {
     // Delete a history with chistoryId
     app.delete("/chistory/:chistoryId", chistory.delete);
   
+    
     // Create a new history
     app.delete("/chistory", chistory.deleteAll);
   };

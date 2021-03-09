@@ -13,6 +13,7 @@ module.exports = app => {
     // Update a part with partsId
     app.put("/parts/:partsId", parts.update);
   
+    
     // Delete a part with partsId
     app.delete("/parts/:partsId", parts.delete);
   
