@@ -107,6 +107,7 @@ Chistory.removeAll = result => {
       return;
     }
 
+    
     console.log(`deleted ${res.affectedRows} charging_history`);
     result(null, res);
   });

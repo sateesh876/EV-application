@@ -15,6 +15,7 @@ Shistory.create = (newShistory, result) => {
       return;
     }
 
+    
     console.log("created shistory: ", { id: res.insertId, ...newShistory });
     result(null, { id: res.insertId, ...newShistory });
   });

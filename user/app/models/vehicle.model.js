@@ -14,6 +14,7 @@ Vehicle.create = (newVehicle, result) => {
       return;
     }
 
+    
     console.log("created vehicle: ", { id: res.insertId, ...newVehicle });
     result(null, { id: res.insertId, ...newVehicle });
   });

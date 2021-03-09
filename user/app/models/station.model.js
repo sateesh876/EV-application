@@ -16,6 +16,7 @@ const Station = function(station) {
   this.cs_type       = station.cs_type;
 };
 
+
 Station.create = (newStation, result) => {
   sql.query("INSERT INTO cstation_details SET ?", newStation, (err, res) => {
     if (err) {

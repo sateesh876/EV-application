@@ -15,6 +15,7 @@ Parts.create = (newPart, result) => {
       return;
     }
 
+    
     console.log("created parts: ", { id: res.insertId, ...newPart });
     result(null, { id: res.insertId, ...newPart });
   });

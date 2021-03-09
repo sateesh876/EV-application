@@ -52,6 +52,7 @@ Device.getAll = result => {
   });
 };
 
+
 Device.updateById = (id, device, result) => {
   sql.query(
     "UPDATE devices_table SET dev_name = ?, start_time = ?, end_time = ? WHERE dev_id = ?",
