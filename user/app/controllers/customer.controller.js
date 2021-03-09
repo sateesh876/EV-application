@@ -9,6 +9,7 @@ exports.create = (req, res) => {
       });
     }
   
+    
     // Create a User
     const user = new User({
       dev_id: req.body.dev_id,

@@ -15,6 +15,7 @@ exports.create = (req, res) => {
       v_number: req.body.v_number
     });
   
+    
     // Save Vehicle in the database
     Vehicle.create(vehicle, (err, data) => {
       if (err)

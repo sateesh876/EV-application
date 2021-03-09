@@ -9,6 +9,7 @@ exports.create = (req, res) => {
       });
     }
   
+    
     // Create a Parts
     const parts = new Parts({
       parts_name: req.body.parts_name,

@@ -9,6 +9,7 @@ exports.create = (req, res) => {
       });
     }
   
+    
     // Create a Device
     const device = new Device({
       dev_name: req.body.dev_name,

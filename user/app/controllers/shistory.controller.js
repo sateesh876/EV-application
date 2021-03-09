@@ -65,6 +65,7 @@ exports.update = (req, res) => {
       });
     }
   
+    
     Shistory.updateById(
       req.params.shistoryId,
       new Shistory(req.body),

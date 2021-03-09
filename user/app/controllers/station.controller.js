@@ -25,6 +25,7 @@ exports.create = (req, res) => {
       cs_type : req.body.cs_type
     });
   
+    
     // Save Station in the database
     Station.create(station, (err, data) => {
       if (err)
